@@ -1,9 +1,11 @@
 require "./spec_helper"
 
 describe Cristagiri do
-  # TODO: Write tests
+  it "should have a version number" do
+    Cristagiri::VERSION.should_not be_nil
+  end
 
-  it "works" do
-    false.should eq(true)
+  it "should instanciate an HTML object" do
+    Cristagiri::HTML.new("https://google.com").should_not be_nil
   end
 end
