@@ -47,4 +47,13 @@ describe Cristagiri do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.at_id("main-content").should be_a XML::Node
   end
+
+  it "should convert the css query into a valid xpath query" do
+    Cristagiri::HTML.css_query_to_xpath("a.method-permalink").should eq "//a[@class=\"method-permalink\"]"
+  end
+
+  it "should find by css query" do
+    doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css("a.method-permalink").should be_a XML::Node
+  end
 end
