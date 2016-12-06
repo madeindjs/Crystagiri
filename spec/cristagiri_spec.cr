@@ -26,17 +26,11 @@ describe Cristagiri do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.should be_a Cristagiri::HTML
     doc.content.should_not eq ""
-
-    nb_tag = 0
-    doc.tag("body") { |i| nb_tag += 1 }
-    nb_tag.should eq 1
-
-    nb_tag = 0
-    doc.tag("h2") { |i| nb_tag += 1 }
-    nb_tag.should eq 6
-
-    nb_tag = 0
-    doc.tag("strong") { |i| nb_tag += 1 }
-    nb_tag.should eq 10
+    # Count number of tags founded
+    {"body" => 1, "h2" => 6, "strong" => 10}.each do |tag, qty|
+      nb_tag = 0
+      doc.tag(tag) { |i| nb_tag += 1 }
+      nb_tag.should eq qty
+    end
   end
 end
