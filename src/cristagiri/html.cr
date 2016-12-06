@@ -24,6 +24,16 @@ module Cristagiri
 
     # Initialize an Html object from Html source
     def initialize(@content : String)
+      @nodes = XML.parse_html @content
+    end
+
+    # Find all nodes by tag name and yield
+    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
+    # founded
+    def tag(tag : String)
+      @nodes.xpath_nodes("//#{tag}").each do |tag|
+        yield tag
+      end
     end
   end
 end
