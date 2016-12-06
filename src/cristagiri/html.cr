@@ -30,8 +30,17 @@ module Cristagiri
     # Find all nodes by tag name and yield
     # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
     # founded
-    def tag(tag : String)
+    def tag(tag : String, &block)
       @nodes.xpath_nodes("//#{tag}").each do |tag|
+        yield tag
+      end
+    end
+
+    # Find all nodes by classname and yield
+    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
+    # founded
+    def class(classname : String, &block)
+      @nodes.xpath_nodes("//*[@class=\"#{classname}\"]").each do |tag|
         yield tag
       end
     end
