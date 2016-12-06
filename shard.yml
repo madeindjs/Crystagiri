@@ -1,0 +1,10 @@
+name: cristagiri
+version: 0.1.0
+
+authors:
+  - madeindjs <madeindjs@gmail.com>
+
+
+crystal: 0.20.1
+
+license: MIT
