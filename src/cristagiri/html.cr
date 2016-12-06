@@ -44,5 +44,12 @@ module Cristagiri
         yield tag
       end
     end
+
+    # Find a node by its id and return a
+    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
+    # founded or a nil if not founded
+    def at_id(id_name : String)
+      return @nodes.xpath_node "//*[@id=\"#{id_name}\"]"
+    end
   end
 end
