@@ -45,6 +45,12 @@ Then you can search [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.h
 # find by id
 puts doc.at_id("main-content") # => <div id="main-content"> ... </div>
 
+# Find by css query
+doc.css("#main-content ol.steps") {|node| puts node}
+# => <ol class="steps"> .. </ol>
+doc.css("#body>quote.introduction") {|node| puts node}
+# => <quote class="introduction"> .. </quote>
+
 # find all tag by their classnames
 doc.class("summary") { |node| puts node }
 # => <div class="summary"> .. </div>
@@ -55,6 +61,7 @@ doc.class("summary") { |node| puts node }
 doc.tag("h2") { |node| puts node }
 ```
 
+> **Know limitations**: For the moment you can't use css query with complex search like `:nth-child`
 
 ## Development
 
