@@ -28,6 +28,7 @@ module Crystagiri
 
     # Transform the css query into an xpath query
     def self.css_query_to_xpath(query : String) : String
+      query = "//#{query}"
       # Convert '#id_name' as '[@id="id_name"]'
       query = query.gsub /\#[A-z]+-*_*[A-z]+/ { |m| "*[@id=\"%s\"]" % m.delete('#') }
       # Convert '.classname' as '[@class="classname"]'
@@ -36,7 +37,9 @@ module Crystagiri
       query = query.gsub /\s*>\s*/ { |m| "/" }
       # Convert ' ' as '//'
       query = query.gsub " ", "//"
-      return "//#{query}"
+      # a leading '*' when xpath does not include node name
+      query = query.gsub /\/\[/ { |m| "/*[" }
+      return query
     end
 
     # Initialize an Html object from Html source
@@ -47,26 +50,22 @@ module Crystagiri
     # Find all nodes by tag name and yield
     # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
     # founded
-    def tag(tag : String, &block)
-      @nodes.xpath_nodes("//#{tag}").each do |tag|
-        yield tag
-      end
+    def where_tag(tag_name : String, &block)
+      css(tag_name) { |node| yield node }
     end
 
     # Find all nodes by classname and yield
     # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
     # founded
-    def class(classname : String, &block)
-      @nodes.xpath_nodes("//*[@class=\"#{classname}\"]").each do |tag|
-        yield tag
-      end
+    def where_class(class_name : String, &block)
+      css(".#{class_name}") { |node| yield node }
     end
 
     # Find a node by its id and return a
     # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
     # founded or a nil if not founded
     def at_id(id_name : String)
-      return @nodes.xpath_node "//*[@id=\"#{id_name}\"]"
+      css("##{id_name}") { |node| return node }
     end
 
     # Find all node corresponding to the css query and yield
