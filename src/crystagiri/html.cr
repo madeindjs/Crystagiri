@@ -1,6 +1,6 @@
 require "http/client"
 
-module Cristagiri
+module Crystagiri
   # Represent an Html document who can be parsed
   class HTML
     getter :content
