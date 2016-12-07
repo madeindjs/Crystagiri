@@ -26,7 +26,7 @@ describe Cristagiri do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.should be_a Cristagiri::HTML
     # Count number of tags founded
-    {"body" => 1, "h2" => 6, "strong" => 10}.each do |tag, qty|
+    {"body" => 1, "h2" => 2, "strong" => 8}.each do |tag, qty|
       nb_tag = 0
       doc.tag(tag) { |i| nb_tag += 1 }
       nb_tag.should eq qty
@@ -36,7 +36,7 @@ describe Cristagiri do
   it "should find by classname name" do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
     # Count number of tags founded
-    {"superclass" => 3, "summary" => 3, "signature" => 10}.each do |classname, qty|
+    {"step-title" => 8, "introduction" => 2, "steps" => 2}.each do |classname, qty|
       nb_tag = 0
       doc.class(classname) { |i| nb_tag += 1 }
       nb_tag.should eq qty
@@ -50,10 +50,11 @@ describe Cristagiri do
 
   it "should convert the css query into a valid xpath query" do
     Cristagiri::HTML.css_query_to_xpath("a.method-permalink").should eq "//a[@class=\"method-permalink\"]"
+    Cristagiri::HTML.css_query_to_xpath("strong.step-title").should eq "//strong[@class=\"step-title\"]"
   end
 
-  it "should find by css query" do
+  it "should find 'tag+classname' by css query" do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
-    doc.at_css("a.method-permalink").should be_a XML::Node
+    doc.at_css("strong.step-title").should be_a XML::Node
   end
 end
