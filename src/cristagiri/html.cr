@@ -32,6 +32,8 @@ module Cristagiri
       query = query.gsub /\#[A-z]+-*_*[A-z]+/ { |m| "*[@id=\"%s\"]" % m.delete('#') }
       # Convert '.classname' as '[@class="classname"]'
       query = query.gsub /\.[A-z]+-*_*[A-z]+/ { |m| "[@class=\"%s\"]" % m.delete('.') }
+      # Convert ' > ' as '/'
+      query = query.gsub /\s*>\s*/ { |m| "/" }
       # Convert ' ' as '//'
       query = query.gsub " ", "//"
       return "//#{query}"
