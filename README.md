@@ -39,27 +39,45 @@ doc = Crystagiri::HTML.from_file "README.md"
 doc = Crystagiri::HTML.from_url "http://example.com/"
 ```
 
-Then you can search [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html) from `Crystagiri::HTML` instance:
+Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html) by:
 
-```crystal
-# find by id
-puts doc.at_id("main-content") # => <div id="main-content"> ... </div>
+* CSS query
 
-# Find by css query
-doc.css("#main-content ol.steps") {|node| puts node}
-# => <ol class="steps"> .. </ol>
-doc.css("#body>quote.introduction") {|node| puts node}
-# => <quote class="introduction"> .. </quote>
+```Crystal
+puts doc.at_css("a.method-permalink")
+# => <a class="method-permalink"> .. </a>
 
-# find all tag by their classnames
-doc.class("summary") { |node| puts node }
-# => <div class="summary"> .. </div>
-# => <div class="summary"> .. </div>
-# => <div class="summary"> .. </div>
-
-# find all tag by their types
-doc.tag("h2") { |node| puts node }
+puts doc.css("li > strong.title") { |node| puts node}
+# => <strong class="title"> .. </strong>
+# => <strong class="title"> .. </strong>
 ```
+
+
+* HTML tag
+
+```Crystal
+doc.where_tag("h2") { |node| puts node }
+# => <h2> .. </h2>
+# => <h2> .. </h2>
+# => <h2> .. </h2>
+```
+
+* HTML id
+
+```Crystal
+puts doc.at_id("main-content") 
+# => <div id="main-content"> ... </div>
+```
+
+* HTML class attribute
+
+```Crystal
+doc.where_class("summary") { |node| puts node }
+# => <div class="summary"> .. </div>
+# => <div class="summary"> .. </div>
+# => <div class="summary"> .. </div>
+```
+
 
 > **Know limitations**: For the moment you can't use css query with complex search like `:nth-child`
 

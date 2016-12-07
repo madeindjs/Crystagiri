@@ -28,7 +28,7 @@ describe Crystagiri do
     # Count number of tags founded
     {"body" => 1, "h2" => 2, "strong" => 8}.each do |tag, qty|
       nb_tag = 0
-      doc.tag(tag) { |i| nb_tag += 1 }
+      doc.where_tag(tag) { |i| nb_tag += 1 }
       nb_tag.should eq qty
     end
   end
@@ -38,7 +38,7 @@ describe Crystagiri do
     # Count number of tags founded
     {"step-title" => 8, "introduction" => 2, "steps" => 2}.each do |classname, qty|
       nb_tag = 0
-      doc.class(classname) { |i| nb_tag += 1 }
+      doc.where_class(classname) { |i| nb_tag += 1 }
       nb_tag.should eq qty
     end
   end
