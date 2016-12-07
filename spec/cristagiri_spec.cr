@@ -16,7 +16,7 @@ describe Cristagiri do
     doc.content.should_not eq ""
   end
 
-  it "should instanciate an HTML object from a file" do
+  it "should instanciate an HTML object from a website url" do
     doc = Cristagiri::HTML.from_url "http://example.com/"
     doc.should be_a Cristagiri::HTML
     doc.content.should_not eq ""

@@ -8,11 +8,15 @@ module Cristagiri
     # Initialize an Html object from Html source fetched
     # from the url
     def self.from_url(url : String) : HTML
-      response = HTTP::Client.get url
-      if response.status_code == 200
-        return HTML.new response.body
-      else
-        raise ArgumentError.new "Host returned #{response.status_code}"
+      begin
+        response = HTTP::Client.get url
+        if response.status_code == 200
+          return HTML.new response.body
+        else
+          raise ArgumentError.new "Host returned #{response.status_code}"
+        end
+      rescue Socket::Error
+        raise Socket::Error.new "Host #{url} cannot be fetched"
       end
     end
 
