@@ -56,8 +56,39 @@ describe Cristagiri do
   end
 
   it "should find 'id' by css query" do
-    Cristagiri::HTML.css_query_to_xpath("#main-content").should eq "//*[@id=\"main-content\"]"
+    # test query converter
+    css_query = "#main-content"
+    xpath_query = "//*[@id=\"main-content\"]"
+    Cristagiri::HTML.css_query_to_xpath(css_query).should eq xpath_query
+    # test on local file
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
-    doc.at_css("#main-content").should be_a XML::Node
+    doc.at_css(css_query).should be_a XML::Node
+  end
+
+  it "should find 'id' by css query" do
+    # test query converter
+    css_query = "#main-content"
+    xpath_query = "//*[@id=\"main-content\"]"
+    Cristagiri::HTML.css_query_to_xpath(css_query).should eq xpath_query
+    # test on local file
+    doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css(css_query).should be_a XML::Node
+  end
+
+  it "should find subtags like 'id tag.class' by css query" do
+    # test query converter
+    css_query = "#main-content ol.steps"
+    xpath_query = "//*[@id=\"main-content\"]//ol[@class=\"steps\"]"
+    Cristagiri::HTML.css_query_to_xpath(css_query).should eq xpath_query
+    # test on local file
+    doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css(css_query).should be_a XML::Node
+    #
+    # another test
+    css_query = "ol.steps strong.step-title"
+    xpath_query = "//ol[@class=\"steps\"]//strong[@class=\"step-title\"]"
+    Cristagiri::HTML.css_query_to_xpath(css_query).should eq xpath_query
+    doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css(css_query).should be_a XML::Node
   end
 end
