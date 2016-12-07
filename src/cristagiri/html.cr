@@ -28,6 +28,9 @@ module Cristagiri
 
     # Transform the css query into an xpath query
     def self.css_query_to_xpath(query : String) : String
+      # Convert '#id_name' as '[@id="id_name"]'
+      query = query.gsub /\#[A-z]+-*_*[A-z]+/ { |m| "*[@id=\"%s\"]" % m.delete('#') }
+      # Convert '.classname' as '[@class="classname"]'
       query = query.gsub /\.[A-z]+-*_*[A-z]+/ { |m| "[@class=\"%s\"]" % m.delete('.') }
       return "//#{query}"
     end

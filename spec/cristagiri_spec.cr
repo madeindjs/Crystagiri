@@ -48,13 +48,16 @@ describe Cristagiri do
     doc.at_id("main-content").should be_a XML::Node
   end
 
-  it "should convert the css query into a valid xpath query" do
+  it "should find 'tag+classname' by css query" do
     Cristagiri::HTML.css_query_to_xpath("a.method-permalink").should eq "//a[@class=\"method-permalink\"]"
     Cristagiri::HTML.css_query_to_xpath("strong.step-title").should eq "//strong[@class=\"step-title\"]"
-  end
-
-  it "should find 'tag+classname' by css query" do
     doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.at_css("strong.step-title").should be_a XML::Node
+  end
+
+  it "should find 'id' by css query" do
+    Cristagiri::HTML.css_query_to_xpath("#main-content").should eq "//*[@id=\"main-content\"]"
+    doc = Cristagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css("#main-content").should be_a XML::Node
   end
 end
