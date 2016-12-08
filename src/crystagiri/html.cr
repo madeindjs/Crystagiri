@@ -48,39 +48,34 @@ module Crystagiri
     end
 
     # Find all nodes by tag name and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded
+    # `Crystagiri::Tag` founded
     def where_tag(tag_name : String, &block)
       css(tag_name) { |node| yield node }
     end
 
     # Find all nodes by classname and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded
+    # `Crystagiri::Tag` founded
     def where_class(class_name : String, &block)
       css(".#{class_name}") { |node| yield node }
     end
 
     # Find a node by its id and return a
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded or a nil if not founded
+    # `Crystagiri::Tag` founded or a nil if not founded
     def at_id(id_name : String)
       css("##{id_name}") { |node| return node }
     end
 
     # Find all node corresponding to the css query and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # if founded or a nil if not founded
+    # `Crystagiri::Tag` founded or a nil if not founded
     def css(query : String, &block)
       query = HTML.css_query_to_xpath(query)
-      @nodes.xpath_nodes("//#{query}").each do |tag|
-        yield tag
+      @nodes.xpath_nodes("//#{query}").each do |node|
+        yield Tag.new node
       end
     end
 
     # Find first node corresponding to the css query and return
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # if founded or a nil if not founded
+    # `Crystagiri::Tag` if founded or a nil if not founded
     def at_css(query : String)
       css(query) { |node| return node }
       return nil
