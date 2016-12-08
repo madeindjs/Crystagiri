@@ -75,6 +75,38 @@ doc.where_class("summary") { |tag| puts tag.node }
 # => <div class="summary"> .. </div>
 ```
 
+## Benchmark
+
+I know you love benchmark between **Ruby** & **Crystal** so there one:
+
+```ruby
+require "nokogiri"
+t1 = Time.now
+doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
+1..100000.times do
+  doc.at_css("h1")
+  doc.css(".step-title"){ |tag| tag }
+end
+puts "executed in #{Time.now - t1} milliseconds"
+```
+
+> executed in 13.891784021 seconds
+
+```crsytal
+require "crystagiri"
+t = Time.now
+doc = Crystagiri::HTML.from_file "./spec/fixture/HTML.html"
+1..100000.times do
+  doc.at_css("h1")
+  doc.css(".step-title") { |tag| tag }
+end
+puts "executed in #{Time.now - t} milliseconds"
+```
+
+> executed in 00:00:06.6636804 seconds
+
+Crystagiri is more than **twice fatser** than Nokogiri!!
+
 
 ## Development
 

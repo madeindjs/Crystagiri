@@ -1,4 +1,5 @@
 require "http/client"
+require "xml"
 
 module Crystagiri
   # Represent an Html document who can be parsed
