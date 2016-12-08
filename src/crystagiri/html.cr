@@ -1,4 +1,5 @@
 require "http/client"
+require "xml"
 
 module Crystagiri
   # Represent an Html document who can be parsed
@@ -47,42 +48,44 @@ module Crystagiri
       @nodes = XML.parse_html @content
     end
 
+    # Find first tag by tag name and return
+    # `Crystagiri::Tag` founded or a nil if not founded
+    def at_tag(tag_name : String) : Crystagiri::Tag | Nil
+      where_tag(tag_name) { |tag| return tag }
+      return nil
+    end
+
     # Find all nodes by tag name and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded
+    # `Crystagiri::Tag` founded
     def where_tag(tag_name : String, &block)
-      css(tag_name) { |node| yield node }
+      css(tag_name) { |tag| yield tag }
     end
 
     # Find all nodes by classname and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded
+    # `Crystagiri::Tag` founded
     def where_class(class_name : String, &block)
-      css(".#{class_name}") { |node| yield node }
+      css(".#{class_name}") { |tag| yield tag }
     end
 
     # Find a node by its id and return a
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # founded or a nil if not founded
+    # `Crystagiri::Tag` founded or a nil if not founded
     def at_id(id_name : String)
-      css("##{id_name}") { |node| return node }
+      css("##{id_name}") { |tag| return tag }
     end
 
     # Find all node corresponding to the css query and yield
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # if founded or a nil if not founded
+    # `Crystagiri::Tag` founded or a nil if not founded
     def css(query : String, &block)
       query = HTML.css_query_to_xpath(query)
-      @nodes.xpath_nodes("//#{query}").each do |tag|
-        yield tag
-      end
+      @nodes.xpath_nodes("//#{query}").each { |node|
+        yield Tag.new(node).as(Crystagiri::Tag)
+      }
     end
 
     # Find first node corresponding to the css query and return
-    # [XML::Node](https://crystal-lang.org/api/0.20.1/XML/Node.html)
-    # if founded or a nil if not founded
+    # `Crystagiri::Tag` if founded or a nil if not founded
     def at_css(query : String)
-      css(query) { |node| return node }
+      css(query) { |tag| return tag }
       return nil
     end
   end

@@ -39,47 +39,74 @@ doc = Crystagiri::HTML.from_file "README.md"
 doc = Crystagiri::HTML.from_url "http://example.com/"
 ```
 
-Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html) by:
+Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html) from the `Crystagiri::HTML` instance. Tag founded will be `Crystagiri::Tag` object with `.node` property:
 
 * CSS query
 
 ```Crystal
-puts doc.at_css("a.method-permalink")
-# => <a class="method-permalink"> .. </a>
-
-puts doc.css("li > strong.title") { |node| puts node}
+puts doc.css("li > strong.title") { |tag| puts tag.node}
 # => <strong class="title"> .. </strong>
 # => <strong class="title"> .. </strong>
 ```
 
+> **Know limitations**: For the moment you can't use css query with complex search like `:nth-child`
 
 * HTML tag
 
 ```Crystal
-doc.where_tag("h2") { |node| puts node }
-# => <h2> .. </h2>
-# => <h2> .. </h2>
-# => <h2> .. </h2>
+doc.where_tag("h2") { |tag| puts tag.content }
+# => Developement
+# => Contributing
 ```
 
 * HTML id
 
 ```Crystal
-puts doc.at_id("main-content") 
-# => <div id="main-content"> ... </div>
+puts doc.at_id("main-content").tagname
+# => div
 ```
 
 * HTML class attribute
 
 ```Crystal
-doc.where_class("summary") { |node| puts node }
+doc.where_class("summary") { |tag| puts tag.node }
 # => <div class="summary"> .. </div>
 # => <div class="summary"> .. </div>
 # => <div class="summary"> .. </div>
 ```
 
+## Benchmark
 
-> **Know limitations**: For the moment you can't use css query with complex search like `:nth-child`
+I know you love benchmark between **Ruby** & **Crystal** so there one:
+
+```ruby
+require "nokogiri"
+t1 = Time.now
+doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
+1..100000.times do
+  doc.at_css("h1")
+  doc.css(".step-title"){ |tag| tag }
+end
+puts "executed in #{Time.now - t1} milliseconds"
+```
+
+> executed in 13.891784021 seconds
+
+```crsytal
+require "crystagiri"
+t = Time.now
+doc = Crystagiri::HTML.from_file "./spec/fixture/HTML.html"
+1..100000.times do
+  doc.at_css("h1")
+  doc.css(".step-title") { |tag| tag }
+end
+puts "executed in #{Time.now - t} milliseconds"
+```
+
+> executed in 00:00:06.6636804 seconds
+
+Crystagiri is more than **twice fatser** than Nokogiri!!
+
 
 ## Development
 
