@@ -13,8 +13,8 @@ module Crystagiri
       return @node.name
     end
 
-    def content : String | Nil
-      return @node.text
+    def content : String
+      return @node.text != nil ? @node.text.as(String) : "".as(String)
     end
   end
 end
