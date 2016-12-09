@@ -31,9 +31,9 @@ module Crystagiri
     def self.css_query_to_xpath(query : String) : String
       query = "//#{query}"
       # Convert '#id_name' as '[@id="id_name"]'
-      query = query.gsub /\#[A-z]+-*_*[A-z]+/ { |m| "*[@id=\"%s\"]" % m.delete('#') }
+      query = query.gsub /\#[A-z0-9]+-*_*[A-z0-9]+/ { |m| "*[@id=\"%s\"]" % m.delete('#') }
       # Convert '.classname' as '[@class="classname"]'
-      query = query.gsub /\.[A-z]+-*_*[A-z]+/ { |m| "[@class=\"%s\"]" % m.delete('.') }
+      query = query.gsub /\.[A-z0-9]+-*_*[A-z0-9]+/ { |m| "[@class=\"%s\"]" % m.delete('.') }
       # Convert ' > ' as '/'
       query = query.gsub /\s*>\s*/ { |m| "/" }
       # Convert ' ' as '//'
