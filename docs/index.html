@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/madeindjs/crystagiri">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/doc.js"></script>
+  <title>README - github.com/madeindjs/crystagiri</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li class="current"><a href="index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent " data-id="github.com/madeindjs/crystagiri/Crystagiri" data-name="crystagiri">
+      <a href="Crystagiri.html">Crystagiri</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/madeindjs/crystagiri/Crystagiri/HTML" data-name="crystagiri::html">
+      <a href="Crystagiri/HTML.html">HTML</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/madeindjs/crystagiri/Crystagiri/Tag" data-name="crystagiri::tag">
+      <a href="Crystagiri/Tag.html">Tag</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1>Crystagiri</h1>
+
+<p>An Html parser library for Crystal like amazing <a href="https://github.com/sparklemotion/nokogiri" target="_blank">Nokogiri</a> Ruby gem.</p>
+
+<blockquote>I not pretend that **Crystagiri** does much as **Nokogiri**. All help will be welcome! :)</blockquote>
+
+<h2>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class='language-yaml'>dependencies:
+  crystagiri:
+    github: madeindjs/crystagiri</code></pre>
+
+<p>and then run </p>
+
+<pre><code class='language-bash'>$ crystal deps</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span></code></pre>
+
+<p>Then you can simply instanciate  a <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> from a Html <code>String</code> like this</p>
+
+<pre><code class='language-crystal'>doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.<span class="k">new</span> <span class="s">&quot;&lt;h1&gt;Crystagiri is awesome&#33;&#33;&lt;/h1&gt;&quot;</span></code></pre>
+
+<p>... or directly load it from a Web Url or a pathname:</p>
+
+<pre><code class='language-crystal'>doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;README.md&quot;</span>
+doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_url <span class="s">&quot;http://example.com/&quot;</span></code></pre>
+
+<p>Then you can search all <a href="https://crystal-lang.org/api/0.20.1/XML/Node.html" target="_blank"><code>XML::Node</code></a> from the <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> instance. Tag founded will be <code><a href="Crystagiri/Tag.html">Crystagiri::Tag</a></code> object with <code>.node</code> property:</p>
+
+<ul><li>CSS query</li></ul>
+
+<pre><code class='language-Crystal
+puts doc.css("li > strong.title") { |tag| puts tag.node}'># => &lt;strong class="title"> .. &lt;/strong>
+# => &lt;strong class="title"> .. &lt;/strong></code></pre>
+
+<blockquote>**Know limitations**: For the moment you can't use css query with complex search like `:nth-child`</blockquote>
+
+<ul><li>HTML tag</li></ul>
+
+<pre><code class='language-Crystal
+doc.where_tag("h2") { |tag| puts tag.content }'># => Developement
+# => Contributing</code></pre>
+
+<ul><li>HTML id</li></ul>
+
+<pre><code class='language-Crystal
+puts doc.at_id("main-content").tagname'># => div</code></pre>
+
+<ul><li>HTML class attribute</li></ul>
+
+<pre><code class='language-Crystal
+doc.where_class("summary") { |tag| puts tag.node }'># => &lt;div class="summary"> .. &lt;/div>
+# => &lt;div class="summary"> .. &lt;/div>
+# => &lt;div class="summary"> .. &lt;/div></code></pre>
+
+<h2>Benchmark</h2>
+
+<p>I know you love benchmark between <strong>Ruby</strong> & <strong>Crystal</strong> so there one:</p>
+
+<pre><code class='language-ruby'>require "nokogiri"
+t1 = Time.now
+doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
+1..100000.times do
+  doc.at_css("h1")
+  doc.css(".step-title"){ |tag| tag }
+end
+puts "executed in #{Time.now - t1} milliseconds"</code></pre>
+
+<blockquote>executed in 13.891784021 seconds</blockquote>
+
+<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span>
+t <span class="o">=</span> <span class="t">Time</span>.now
+doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;./spec/fixture/HTML.html&quot;</span>
+<span class="n">1</span>..<span class="n">100000</span>.times <span class="k">do</span>
+  doc.at_css(<span class="s">&quot;h1&quot;</span>)
+  doc.css(<span class="s">&quot;.step-title&quot;</span>) { <span class="o">|</span>tag<span class="o">|</span> tag }
+<span class="k">end</span>
+puts <span class="s">&quot;executed in </span><span class="i">#{</span></span><span class="t">Time</span>.now <span class="o">-</span> t<span class="s"><span class="i">}</span> milliseconds&quot;</span></code></pre>
+
+<blockquote>executed in 00:00:06.6636804 seconds</blockquote>
+
+<p>Crystagiri is more than <strong>twice fatser</strong> than Nokogiri!!</p>
+
+<h2>Development</h2>
+
+<p>Clone this repository and go in it:</p>
+
+<pre><code class='language-bash'>$ git clone https://github.com/madeindjs/crystagiri.git
+$ cd crystagiri</code></pre>
+
+<p>You can generate the complete documentation with </p>
+
+<pre><code class='language-bash'>$ crystal doc</code></pre>
+
+<p>And run <strong>spec</strong> tests to ensure all work correctly </p>
+
+<pre><code class='language-bash'>$ crystal spec</code></pre>
+
+<h2>Contributing</h2>
+
+<ol><li>Fork it ( https://github.com/madeindjs/crystagiri/fork )</li><li>Create your feature branch <code>git checkout -b my-new-feature</code></li><li>Commit your changes <code>git commit -am "Add some feature"</code></li><li>Push to the branch <code>git push origin my-new-feature</code></li><li>Create a new Pull Request</li></ol>
+
+<h2>Contributors</h2>
+
+<ul><li><a href="https://github.com/madeindjs" target="_blank">madeindjs</a> - creator, maintainer</li></ul>
+</div>
+</body>
+</html>

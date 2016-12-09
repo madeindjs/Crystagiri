@@ -106,5 +106,12 @@ describe Crystagiri::HTML do
   it "should find a class with number" do
     doc = Crystagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.at_css(".title69").should be_a Crystagiri::Tag
+    doc.css("#ctl00_ContentPlaceHolder_LblRecetteNombre") { |tag|
+      tag.content.should eq "4 pers"
+    }
+  end
+
+  it "should pass bulletprrof property name" do
+    Crystagiri::HTML.css_query_to_xpath("strong #Az_xA--az.--").should eq "//strong//*[@id=\"Az_xA--az\"].--"
   end
 end
