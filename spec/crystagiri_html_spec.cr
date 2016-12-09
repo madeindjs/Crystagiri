@@ -102,4 +102,9 @@ describe Crystagiri::HTML do
     Crystagiri::HTML.css_query_to_xpath(css_query).should eq xpath_query
     doc.at_css(css_query).should be_a Crystagiri::Tag
   end
+
+  it "should find a class with number" do
+    doc = Crystagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.at_css(".title69").should be_a Crystagiri::Tag
+  end
 end

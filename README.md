@@ -92,7 +92,7 @@ puts "executed in #{Time.now - t1} milliseconds"
 
 > executed in 13.891784021 seconds
 
-```crsytal
+```crystal
 require "crystagiri"
 t = Time.now
 doc = Crystagiri::HTML.from_file "./spec/fixture/HTML.html"
