@@ -1,8 +1,8 @@
 # Crystagiri
 
-An Html parser library for Crystal like amazing [Nokogiri](https://github.com/sparklemotion/nokogiri) Ruby gem.
+An HTML parser library for Crystal like the amazing [Nokogiri](https://github.com/sparklemotion/nokogiri) Ruby gem.
 
-> I not pretend that **Crystagiri** does much as **Nokogiri**. All help will be welcome! :)
+> I won't pretend that **Crystagiri** does much as **Nokogiri**. All help is welcome! :)
 
 ## Installation
 
@@ -26,20 +26,20 @@ $ crystal deps
 require "crystagiri"
 ```
 
-Then you can simply instanciate  a `Crystagiri::HTML` from a Html `String` like this
+Then you can simply instantiate  a `Crystagiri::HTML` object from an HTML `String` like this
 
 ```crystal
 doc = Crystagiri::HTML.new "<h1>Crystagiri is awesome!!</h1>"
 ```
 
-... or directly load it from a Web Url or a pathname:
+... or directly load it from a Web URL or a pathname:
 
 ```crystal
 doc = Crystagiri::HTML.from_file "README.md"
 doc = Crystagiri::HTML.from_url "http://example.com/"
 ```
 
-Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html) from the `Crystagiri::HTML` instance. Tag founded will be `Crystagiri::Tag` object with `.node` property:
+Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html)s from the `Crystagiri::HTML` instance. The tags found will be `Crystagiri::Tag` objects with the `.node` property:
 
 * CSS query
 
@@ -49,13 +49,13 @@ puts doc.css("li > strong.title") { |tag| puts tag.node}
 # => <strong class="title"> .. </strong>
 ```
 
-> **Know limitations**: For the moment you can't use css query with complex search like `:nth-child`
+> **Known limitations**: Currently, you can't use CSS queries with complex search specifiers like `:nth-child`
 
 * HTML tag
 
 ```Crystal
 doc.where_tag("h2") { |tag| puts tag.content }
-# => Developement
+# => Development
 # => Contributing
 ```
 
@@ -77,7 +77,7 @@ doc.where_class("summary") { |tag| puts tag.node }
 
 ## Benchmark
 
-I know you love benchmark between **Ruby** & **Crystal** so there one:
+I know you love benchmarks between **Ruby** & **Crystal**, so here's one:
 
 ```ruby
 require "nokogiri"
@@ -105,25 +105,25 @@ puts "executed in #{Time.now - t} milliseconds"
 
 > executed in 00:00:06.6636804 seconds
 
-Crystagiri is more than **twice fatser** than Nokogiri!!
+Crystagiri is over **twice as fast** as Nokogiri!!
 
 
 ## Development
 
-Clone this repository and go in it:
+Clone this repository and navigate to it:
 
 ```bash
 $ git clone https://github.com/madeindjs/crystagiri.git
 $ cd crystagiri
 ```
 
-You can generate the complete documentation with 
+You can generate all documentation with 
 
 ```bash
 $ crystal doc
 ```
 
-And run **spec** tests to ensure all work correctly 
+And run **spec** tests to ensure everything works correctly 
 
 ```bash
 $ crystal spec
