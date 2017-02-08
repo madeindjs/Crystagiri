@@ -90,7 +90,7 @@ end
 puts "executed in #{Time.now - t1} milliseconds"
 ```
 
-> executed in 13.891784021 seconds
+> executed in 00:00:13.89 seconds with Ruby 2.3.1p112
 
 ```crystal
 require "crystagiri"
@@ -103,9 +103,9 @@ end
 puts "executed in #{Time.now - t} milliseconds"
 ```
 
-> executed in 00:00:06.6636804 seconds
+> executed in 00:00:04.62 seconds on Crystal 0.20.5 with release flag
 
-Crystagiri is over **twice as fast** as Nokogiri!!
+Crystagiri is **three time faster** than Nokogiri!!
 
 
 ## Development
