@@ -5,6 +5,7 @@ module Crystagiri
   # Represent an Html document who can be parsed
   class HTML
     getter :content
+    getter :nodes
 
     # Initialize an Html object from Html source fetched
     # from the url
