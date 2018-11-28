@@ -58,28 +58,31 @@ module Crystagiri
 
     # Find all nodes by tag name and yield
     # `Crystagiri::Tag` founded
-    def where_tag(tag_name : String, &block)
-      css(tag_name) { |tag| yield tag }
+    def where_tag(tag_name : String, &block) : Array(Tag)
+      return css(tag_name) { |tag| yield tag }
     end
 
     # Find all nodes by classname and yield
     # `Crystagiri::Tag` founded
-    def where_class(class_name : String, &block)
-      css(".#{class_name}") { |tag| yield tag }
+    def where_class(class_name : String, &block) : Array(Tag)
+      return css(".#{class_name}") { |tag| yield tag }
     end
 
     # Find a node by its id and return a
     # `Crystagiri::Tag` founded or a nil if not founded
-    def at_id(id_name : String)
+    def at_id(id_name : String) : Crystagiri::Tag | Nil
       css("##{id_name}") { |tag| return tag }
+      return nil
     end
 
     # Find all node corresponding to the css query and yield
     # `Crystagiri::Tag` founded or a nil if not founded
-    def css(query : String, &block)
+    def css(query : String) : Array(Tag)
       query = HTML.css_query_to_xpath(query)
-      @nodes.xpath_nodes("//#{query}").each { |node|
-        yield Tag.new(node).as(Crystagiri::Tag)
+      return @nodes.xpath_nodes("//#{query}").map { |node|
+        tag = Tag.new(node).as(Crystagiri::Tag)
+        yield tag
+        tag
       }
     end
 

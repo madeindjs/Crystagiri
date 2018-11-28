@@ -111,6 +111,11 @@ describe Crystagiri::HTML do
     }
   end
 
+  it "should cess return an array" do
+    doc = Crystagiri::HTML.from_file "spec/fixture/HTML.html"
+    doc.css("li") { |t| t }.size.should eq 8
+  end
+
   it "should pass bulletprrof property name" do
     Crystagiri::HTML.css_query_to_xpath("strong #Az_xA--az.--").should eq "//strong//*[@id=\"Az_xA--az\"].--"
   end

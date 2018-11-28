@@ -1,8 +1,8 @@
 name: crystagiri
-version: 0.3.3
+version: 0.3.4
 
 authors:
-  - madeindjs <madeindjs@gmail.com>
+  - Alexandre Rousseau <contact@rousseau-alexandre.fr>
   - prutheus <mail@prutheus.com>
 
 crystal: 0.20.1
