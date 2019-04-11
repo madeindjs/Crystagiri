@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta id="repository-name" content="github.com/madeindjs/crystagiri">
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="js/doc.js"></script>
-  <title>README - github.com/madeindjs/crystagiri</title>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.1">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "";
+</script>
+
+  <meta id="repository-name" content="github.com/giuseongit/Crystagiri">
+  <title>README - github.com/giuseongit/Crystagiri</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li class="current"><a href="index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
-  <li class="parent " data-id="github.com/madeindjs/crystagiri/Crystagiri" data-name="crystagiri">
+  <li class="parent " data-id="github.com/giuseongit/Crystagiri/Crystagiri" data-name="crystagiri">
       <a href="Crystagiri.html">Crystagiri</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/madeindjs/crystagiri/Crystagiri/HTML" data-name="crystagiri::html">
+  <li class=" " data-id="github.com/giuseongit/Crystagiri/Crystagiri/HTML" data-name="crystagiri::html">
       <a href="Crystagiri/HTML.html">HTML</a>
       
     </li>
   
-  <li class=" " data-id="github.com/madeindjs/crystagiri/Crystagiri/Tag" data-name="crystagiri::tag">
+  <li class=" " data-id="github.com/giuseongit/Crystagiri/Crystagiri/Tag" data-name="crystagiri::tag">
       <a href="Crystagiri/Tag.html">Tag</a>
       
     </li>
@@ -42,73 +58,75 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1>Crystagiri</h1>
 
-<p>An Html parser library for Crystal like amazing <a href="https://github.com/sparklemotion/nokogiri" target="_blank">Nokogiri</a> Ruby gem.</p>
+<p>An HTML parser library for Crystal like the amazing <a href="https://github.com/sparklemotion/nokogiri" target="_blank">Nokogiri</a> Ruby gem.</p>
 
-<blockquote>I not pretend that **Crystagiri** does much as **Nokogiri**. All help will be welcome! :)</blockquote>
+<blockquote>I won't pretend that <strong>Crystagiri</strong> does much as <strong>Nokogiri</strong>. All help is welcome! :)</blockquote>
 
 <h2>Installation</h2>
 
 <p>Add this to your application's <code>shard.yml</code>:</p>
 
-<pre><code class='language-yaml'>dependencies:
+<pre><code class="language-yaml">dependencies:
   crystagiri:
     github: madeindjs/crystagiri</code></pre>
 
 <p>and then run </p>
 
-<pre><code class='language-bash'>$ crystal deps</code></pre>
+<pre><code class="language-bash">$ crystal deps</code></pre>
 
 <h2>Usage</h2>
 
-<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span></code></pre>
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span></code></pre>
 
-<p>Then you can simply instanciate  a <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> from a Html <code>String</code> like this</p>
+<p>Then you can simply instantiate  a <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> object from an HTML <code>String</code> like this</p>
 
-<pre><code class='language-crystal'>doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.<span class="k">new</span> <span class="s">&quot;&lt;h1&gt;Crystagiri is awesome&#33;&#33;&lt;/h1&gt;&quot;</span></code></pre>
+<pre><code class="language-crystal">doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.<span class="k">new</span> <span class="s">&quot;&lt;h1&gt;Crystagiri is awesome!!&lt;/h1&gt;&quot;</span></code></pre>
 
-<p>... or directly load it from a Web Url or a pathname:</p>
+<p>... or directly load it from a Web URL or a pathname:</p>
 
-<pre><code class='language-crystal'>doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;README.md&quot;</span>
+<pre><code class="language-crystal">doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;README.md&quot;</span>
 doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_url <span class="s">&quot;http://example.com/&quot;</span></code></pre>
 
-<p>Then you can search all <a href="https://crystal-lang.org/api/0.20.1/XML/Node.html" target="_blank"><code>XML::Node</code></a> from the <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> instance. Tag founded will be <code><a href="Crystagiri/Tag.html">Crystagiri::Tag</a></code> object with <code>.node</code> property:</p>
+<p>Then you can search all <a href="https://crystal-lang.org/api/0.20.1/XML/Node.html" target="_blank"><code>XML::Node</code></a>s from the <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> instance. The tags found will be <code><a href="Crystagiri/Tag.html">Crystagiri::Tag</a></code> objects with the <code>.node</code> property:</p>
 
 <ul><li>CSS query</li></ul>
 
-<pre><code class='language-Crystal
-puts doc.css("li > strong.title") { |tag| puts tag.node}'># => &lt;strong class="title"> .. &lt;/strong>
+<pre><code class="language-Crystal">puts doc.css("li > strong.title") { |tag| puts tag.node}
+# => &lt;strong class="title"> .. &lt;/strong>
 # => &lt;strong class="title"> .. &lt;/strong></code></pre>
 
-<blockquote>**Know limitations**: For the moment you can't use css query with complex search like `:nth-child`</blockquote>
+<blockquote><strong>Known limitations</strong>: Currently, you can't use CSS queries with complex search specifiers like <code>:nth-child</code></blockquote>
 
 <ul><li>HTML tag</li></ul>
 
-<pre><code class='language-Crystal
-doc.where_tag("h2") { |tag| puts tag.content }'># => Developement
+<pre><code class="language-Crystal">doc.where_tag("h2") { |tag| puts tag.content }
+# => Development
 # => Contributing</code></pre>
 
 <ul><li>HTML id</li></ul>
 
-<pre><code class='language-Crystal
-puts doc.at_id("main-content").tagname'># => div</code></pre>
+<pre><code class="language-Crystal">puts doc.at_id("main-content").tagname
+# => div</code></pre>
 
 <ul><li>HTML class attribute</li></ul>
 
-<pre><code class='language-Crystal
-doc.where_class("summary") { |tag| puts tag.node }'># => &lt;div class="summary"> .. &lt;/div>
+<pre><code class="language-Crystal">doc.where_class("summary") { |tag| puts tag.node }
+# => &lt;div class="summary"> .. &lt;/div>
 # => &lt;div class="summary"> .. &lt;/div>
 # => &lt;div class="summary"> .. &lt;/div></code></pre>
 
 <h2>Benchmark</h2>
 
-<p>I know you love benchmark between <strong>Ruby</strong> & <strong>Crystal</strong> so there one:</p>
+<p>I know you love benchmarks between <strong>Ruby</strong> & <strong>Crystal</strong>, so here's one:</p>
 
-<pre><code class='language-ruby'>require "nokogiri"
+<pre><code class="language-ruby">require "nokogiri"
 t1 = Time.now
 doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
 1..100000.times do
@@ -117,35 +135,35 @@ doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
 end
 puts "executed in #{Time.now - t1} milliseconds"</code></pre>
 
-<blockquote>executed in 13.891784021 seconds</blockquote>
+<blockquote>executed in 00:00:12.08 seconds with Ruby 2.5.1 with RVM</blockquote>
 
-<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span>
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span>
 t <span class="o">=</span> <span class="t">Time</span>.now
 doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;./spec/fixture/HTML.html&quot;</span>
 <span class="n">1</span>..<span class="n">100000</span>.times <span class="k">do</span>
   doc.at_css(<span class="s">&quot;h1&quot;</span>)
   doc.css(<span class="s">&quot;.step-title&quot;</span>) { <span class="o">|</span>tag<span class="o">|</span> tag }
 <span class="k">end</span>
-puts <span class="s">&quot;executed in </span><span class="i">#{</span></span><span class="t">Time</span>.now <span class="o">-</span> t<span class="s"><span class="i">}</span> milliseconds&quot;</span></code></pre>
+puts <span class="s">&quot;executed in </span><span class="i">#{</span><span class="t">Time</span>.now <span class="o">-</span> t<span class="i">}</span><span class="s"> milliseconds&quot;</span></code></pre>
 
-<blockquote>executed in 00:00:06.6636804 seconds</blockquote>
+<blockquote>executed in 00:00:03.89 seconds on Crystal 0.27.0 on LLVM 4.0.0 with release flag</blockquote>
 
-<p>Crystagiri is more than <strong>twice fatser</strong> than Nokogiri!!</p>
+<p>Crystagiri is <strong>three time faster</strong> than Nokogiri!!</p>
 
 <h2>Development</h2>
 
-<p>Clone this repository and go in it:</p>
+<p>Clone this repository and navigate to it:</p>
 
-<pre><code class='language-bash'>$ git clone https://github.com/madeindjs/crystagiri.git
+<pre><code class="language-bash">$ git clone https://github.com/madeindjs/crystagiri.git
 $ cd crystagiri</code></pre>
 
-<p>You can generate the complete documentation with </p>
+<p>You can generate all documentation with </p>
 
-<pre><code class='language-bash'>$ crystal doc</code></pre>
+<pre><code class="language-bash">$ crystal doc</code></pre>
 
-<p>And run <strong>spec</strong> tests to ensure all work correctly </p>
+<p>And run <strong>spec</strong> tests to ensure everything works correctly </p>
 
-<pre><code class='language-bash'>$ crystal spec</code></pre>
+<pre><code class="language-bash">$ crystal spec</code></pre>
 
 <h2>Contributing</h2>
 
