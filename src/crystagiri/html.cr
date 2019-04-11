@@ -7,6 +7,16 @@ module Crystagiri
     getter :content
     getter :nodes
 
+    @@experimental = false
+
+    def self.experimental=(flag : Bool)
+      @@experimental = flag
+    end
+
+    def self.experimental
+      @@experimental
+    end
+
     # Initialize an Html object from Html source fetched
     # from the url
     def self.from_url(url : String, follow : Bool = false) : HTML
@@ -49,11 +59,60 @@ module Crystagiri
     # Initialize an Html object from Html source
     def initialize(@content : String)
       @nodes = XML.parse_html @content
+
+      # WARNING: new engine test, may not work
+      @ids = Hash(String, XML::Node).new
+      @tags = Hash(String, Array(XML::Node)).new
+      @classes = Hash(String, Array(XML::Node)).new
+      if @@experimental
+        visit @nodes  # Build internal id map
+      end
+    end
+
+    private def add_id(id : String, node : XML::Node)
+      @ids[id] = node
+    end
+
+    private def add_node(node : XML::Node)
+      if @tags[node.name]? == nil
+        @tags[node.name] = [] of XML::Node
+      end
+      @tags[node.name] << node
+    end
+
+    private def add_class(klass : String, node : XML::Node)
+      if @classes[klass]? == nil
+        @classes[klass] = [] of XML::Node
+      end
+      @classes[klass] << node
+    end
+
+    private def visit(node : XML::Node)
+      if node.element?
+        add_node node
+        if to = node["id"]?
+          add_id to, node
+        end
+        if classes = node["class"]?
+          classes.split(' ') { |to| add_class to, node }
+        end
+      end
+      node.children.each do | child |
+        visit child
+      end
     end
 
     # Find first tag by tag name and return
     # `Crystagiri::Tag` founded or a nil if not founded
     def at_tag(tag_name : String) : Crystagiri::Tag | Nil
+      if @@experimental
+        if tags = @tags[tag_name]?
+          tags.each do |tag|
+            return Tag.new(tag).as Crystagiri::Tag
+          end
+        end
+        return nil
+      end
       where_tag(tag_name) { |tag| return tag }
       return nil
     end
@@ -61,18 +120,45 @@ module Crystagiri
     # Find all nodes by tag name and yield
     # `Crystagiri::Tag` founded
     def where_tag(tag_name : String, &block) : Array(Tag)
+      if @@experimental
+        arr = [] of Crystagiri::Tag
+        if tags = @tags[tag_name]?
+          tags.each do |node|
+            tag = Tag.new(node).as Crystagiri::Tag
+            yield tag
+            arr << tag
+          end
+        end
+        return arr
+      end
       return css(tag_name) { |tag| yield tag }
     end
 
     # Find all nodes by classname and yield
     # `Crystagiri::Tag` founded
     def where_class(class_name : String, &block) : Array(Tag)
+      if @@experimental
+        arr = [] of Crystagiri::Tag
+        if klasses = @classes[class_name]?
+          klasses.each do |node|
+            klass = Tag.new(node).as Crystagiri::Tag
+            yield klass
+            arr << klass
+          end
+        end
+        return arr
+      end
       return css(".#{class_name}") { |tag| yield tag }
     end
 
     # Find a node by its id and return a
     # `Crystagiri::Tag` founded or a nil if not founded
     def at_id(id_name : String) : Crystagiri::Tag | Nil
+      if @@experimental
+        if node = @ids[id_name]?
+          return Tag.new(node).as Crystagiri::Tag
+        end
+      end
       css("##{id_name}") { |tag| return tag }
       return nil
     end
