@@ -9,11 +9,13 @@ module Crystagiri
 
     # Initialize an Html object from Html source fetched
     # from the url
-    def self.from_url(url : String) : HTML
+    def self.from_url(url : String, follow : Bool = false) : HTML
       begin
         response = HTTP::Client.get url
         if response.status_code == 200
           return HTML.new response.body
+        elsif follow && response.status_code == 301
+          from_url response.headers["Location"], follow: true
         else
           raise ArgumentError.new "Host returned #{response.status_code}"
         end

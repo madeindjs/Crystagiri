@@ -18,6 +18,18 @@ describe Crystagiri::HTML do
     doc.content.should_not eq ""
   end
 
+  it "should not instanciate an HTML object from a website url which responds 301" do
+    expect_raises(ArgumentError) do
+      doc = Crystagiri::HTML.from_url "http://google.com/"
+    end
+  end
+
+  it "should instanciate an HTML object from a website url  which responds 301 using follow: true" do
+    doc = Crystagiri::HTML.from_url "http://google.com/", follow: true
+    doc.should be_a Crystagiri::HTML
+    doc.content.should_not eq ""
+  end
+
   it "should find nodes by tag name" do
     doc = Crystagiri::HTML.from_file "spec/fixture/HTML.html"
     doc.should be_a Crystagiri::HTML
