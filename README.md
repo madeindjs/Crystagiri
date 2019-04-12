@@ -14,7 +14,7 @@ dependencies:
     github: madeindjs/crystagiri
 ```
 
-and then run 
+and then run
 
 ```bash
 $ crystal deps
@@ -39,7 +39,9 @@ doc = Crystagiri::HTML.from_file "README.md"
 doc = Crystagiri::HTML.from_url "http://example.com/"
 ```
 
-Then you can search all [`XML::Node`](https://crystal-lang.org/api/0.20.1/XML/Node.html)s from the `Crystagiri::HTML` instance. The tags found will be `Crystagiri::Tag` objects with the `.node` property:
+> Also you can specify `follow: true` flag if you want to follow redirect URL
+
+Then you can search all [`XML::Node`](https://crystal-lang.org/api/XML/Node.html)s from the `Crystagiri::HTML` instance. The tags found will be `Crystagiri::Tag` objects with the `.node` property:
 
 * CSS query
 
@@ -90,7 +92,7 @@ end
 puts "executed in #{Time.now - t1} milliseconds"
 ```
 
-> executed in 00:00:12.08 seconds with Ruby 2.5.1 with RVM
+> executed in 00:00:24.4 seconds with Ruby 2.6.0 with RVM on old Mac
 
 ```crystal
 require "crystagiri"
@@ -103,9 +105,9 @@ end
 puts "executed in #{Time.now - t} milliseconds"
 ```
 
-> executed in 00:00:03.89 seconds on Crystal 0.27.0 on LLVM 4.0.0 with release flag
+> executed in 00:00:05.69 seconds on Crystal 0.27.2 on LLVM 6.0.1 with release flag on the same old mac
 
-Crystagiri is **three time faster** than Nokogiri!!
+Crystagiri is **four time faster** than Nokogiri!!
 
 
 ## Development
@@ -117,13 +119,13 @@ $ git clone https://github.com/madeindjs/crystagiri.git
 $ cd crystagiri
 ```
 
-You can generate all documentation with 
+You can generate all documentation with
 
 ```bash
 $ crystal doc
 ```
 
-And run **spec** tests to ensure everything works correctly 
+And run **spec** tests to ensure everything works correctly
 
 ```bash
 $ crystal spec
@@ -140,4 +142,4 @@ $ crystal spec
 
 ## Contributors
 
-- [madeindjs](https://github.com/madeindjs) - creator, maintainer
+See the [list on Github](https://github.com/madeindjs/Crystagiri/graphs/contributors)
