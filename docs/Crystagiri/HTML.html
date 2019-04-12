@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta id="repository-name" content="github.com/madeindjs/crystagiri">
-  <link href="../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../js/doc.js"></script>
-  <title>Crystagiri::HTML - github.com/madeindjs/crystagiri</title>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.1">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/giuseongit/Crystagiri">
+  <title>Crystagiri::HTML - github.com/giuseongit/Crystagiri</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
-  <li class="parent open current" data-id="github.com/madeindjs/crystagiri/Crystagiri" data-name="crystagiri">
+  <li class="parent open current" data-id="github.com/giuseongit/Crystagiri/Crystagiri" data-name="crystagiri">
       <a href="../Crystagiri.html">Crystagiri</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/madeindjs/crystagiri/Crystagiri/HTML" data-name="crystagiri::html">
+  <li class=" current" data-id="github.com/giuseongit/Crystagiri/Crystagiri/HTML" data-name="crystagiri::html">
       <a href="../Crystagiri/HTML.html">HTML</a>
       
     </li>
   
-  <li class=" " data-id="github.com/madeindjs/crystagiri/Crystagiri/Tag" data-name="crystagiri::tag">
+  <li class=" " data-id="github.com/giuseongit/Crystagiri/Crystagiri/Tag" data-name="crystagiri::tag">
       <a href="../Crystagiri/Tag.html">Tag</a>
       
     </li>
@@ -42,9 +58,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">class</span> Crystagiri::HTML
@@ -77,12 +95,42 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L6" target="_blank">crystagiri/html.cr</a>
+      <a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L6" target="_blank">
+        crystagiri/html.cr
+      </a>
     
     <br/>
   
 
 
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_file%28path%3AString%29%3AHTML-class-method" class="signature"><strong>.from_file</strong>(path : String) : HTML</a>
+        
+          <div class="summary"><p>Initialize an Html object from content of file designed by the given filepath</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#from_url%28url%3AString%2Cfollow%3ABool%3Dfalse%29%3AHTML-class-method" class="signature"><strong>.from_url</strong>(url : String, follow : Bool = <span class="n">false</span>) : HTML</a>
+        
+          <div class="summary"><p>Initialize an Html object from Html source fetched from the url</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28content%3AString%29-class-method" class="signature"><strong>.new</strong>(content : String)</a>
+        
+          <div class="summary"><p>Initialize an Html object from Html source</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -93,27 +141,6 @@
         <a href="#css_query_to_xpath%28query%3AString%29%3AString-class-method" class="signature"><strong>.css_query_to_xpath</strong>(query : String) : String</a>
         
           <div class="summary"><p>Transform the css query into an xpath query</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#from_file%28path%3AString%29%3AHTML-class-method" class="signature"><strong>.from_file</strong>(path : String) : HTML</a>
-        
-          <div class="summary"><p>Initialize an Html object from content of file designed by the given filepath</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#from_url%28url%3AString%29%3AHTML-class-method" class="signature"><strong>.from_url</strong>(url : String) : HTML</a>
-        
-          <div class="summary"><p>Initialize an Html object from Html source fetched from the url</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new%28content%3AString%29-class-method" class="signature"><strong>.new</strong>(content : String)</a>
-        
-          <div class="summary"><p>Initialize an Html object from Html source</p></div>
         
       </li>
     
@@ -132,7 +159,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#at_id%28id_name%3AString%29-instance-method" class="signature"><strong>#at_id</strong>(id_name : String)</a>
+        <a href="#at_id%28id_name%3AString%29%3ACrystagiri%3A%3ATag%3F-instance-method" class="signature"><strong>#at_id</strong>(id_name : String) : Crystagiri::Tag?</a>
         
           <div class="summary"><p>Find a node by its id and return a <code><a href="../Crystagiri/Tag.html">Crystagiri::Tag</a></code> founded or a nil if not founded</p></div>
         
@@ -151,21 +178,26 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#css%28query%3AString%2C%26block%29-instance-method" class="signature"><strong>#css</strong>(query : String, &block)</a>
+        <a href="#css%28query%3AString%2C%26block%29%3AArray%28Tag%29-instance-method" class="signature"><strong>#css</strong>(query : String, &block) : Array(Tag)</a>
         
           <div class="summary"><p>Find all node corresponding to the css query and yield <code><a href="../Crystagiri/Tag.html">Crystagiri::Tag</a></code> founded or a nil if not founded</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#where_class%28class_name%3AString%2C%26block%29-instance-method" class="signature"><strong>#where_class</strong>(class_name : String, &block)</a>
+        <a href="#nodes%3AXML%3A%3ANode-instance-method" class="signature"><strong>#nodes</strong> : XML::Node</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#where_class%28class_name%3AString%2C%26block%29%3AArray%28Tag%29-instance-method" class="signature"><strong>#where_class</strong>(class_name : String, &block) : Array(Tag)</a>
         
           <div class="summary"><p>Find all nodes by classname and yield <code><a href="../Crystagiri/Tag.html">Crystagiri::Tag</a></code> founded</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#where_tag%28tag_name%3AString%2C%26block%29-instance-method" class="signature"><strong>#where_tag</strong>(tag_name : String, &block)</a>
+        <a href="#where_tag%28tag_name%3AString%2C%26block%29%3AArray%28Tag%29-instance-method" class="signature"><strong>#where_tag</strong>(tag_name : String, &block) : Array(Tag)</a>
         
           <div class="summary"><p>Find all nodes by tag name and yield <code><a href="../Crystagiri/Tag.html">Crystagiri::Tag</a></code> founded</p></div>
         
@@ -185,7 +217,13 @@
     
 
 
+    
+
+
   
+    
+
+
     
 
 
@@ -196,27 +234,9 @@
 </div>
 
 
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="css_query_to_xpath&#40;query:String&#41;:String-class-method">
-      <div class="signature">
-        
-        def self.<strong>css_query_to_xpath</strong>(query : String) : String
-
-        <a class="method-permalink" href="#css_query_to_xpath%28query%3AString%29%3AString-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Transform the css query into an xpath query</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L31" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="from_file&#40;path:String&#41;:HTML-class-method">
+    <div class="entry-detail" id="from_file(path:String):HTML-class-method">
       <div class="signature">
         
         def self.<strong>from_file</strong>(path : String) : <a href="../Crystagiri/HTML.html">HTML</a>
@@ -230,17 +250,17 @@ designed by the given filepath</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="from_url&#40;url:String&#41;:HTML-class-method">
+    <div class="entry-detail" id="from_url(url:String,follow:Bool=false):HTML-class-method">
       <div class="signature">
         
-        def self.<strong>from_url</strong>(url : String) : <a href="../Crystagiri/HTML.html">HTML</a>
+        def self.<strong>from_url</strong>(url : String, follow : Bool = <span class="n">false</span>) : <a href="../Crystagiri/HTML.html">HTML</a>
 
-        <a class="method-permalink" href="#from_url%28url%3AString%29%3AHTML-class-method">#</a>
+        <a class="method-permalink" href="#from_url%28url%3AString%2Cfollow%3ABool%3Dfalse%29%3AHTML-class-method">#</a>
       </div>
       
         <div class="doc"><p>Initialize an Html object from Html source fetched
@@ -249,12 +269,12 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new&#40;content:String&#41;-class-method">
+    <div class="entry-detail" id="new(content:String)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(content : String)
@@ -267,7 +287,30 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="css_query_to_xpath(query:String):String-class-method">
+      <div class="signature">
+        
+        def self.<strong>css_query_to_xpath</strong>(query : String) : String
+
+        <a class="method-permalink" href="#css_query_to_xpath%28query%3AString%29%3AString-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Transform the css query into an xpath query</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -277,7 +320,7 @@ from the url</p></div>
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="at_css&#40;query:String&#41;-instance-method">
+    <div class="entry-detail" id="at_css(query:String)-instance-method">
       <div class="signature">
         
         def <strong>at_css</strong>(query : String)
@@ -291,17 +334,17 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L87" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="at_id&#40;id_name:String&#41;-instance-method">
+    <div class="entry-detail" id="at_id(id_name:String):Crystagiri::Tag?-instance-method">
       <div class="signature">
         
-        def <strong>at_id</strong>(id_name : String)
+        def <strong>at_id</strong>(id_name : String) : <a href="../Crystagiri/Tag.html">Crystagiri::Tag</a>?
 
-        <a class="method-permalink" href="#at_id%28id_name%3AString%29-instance-method">#</a>
+        <a class="method-permalink" href="#at_id%28id_name%3AString%29%3ACrystagiri%3A%3ATag%3F-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Find a node by its id and return a
@@ -310,12 +353,12 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="at_tag&#40;tag_name:String&#41;:Crystagiri::Tag?-instance-method">
+    <div class="entry-detail" id="at_tag(tag_name:String):Crystagiri::Tag?-instance-method">
       <div class="signature">
         
         def <strong>at_tag</strong>(tag_name : String) : <a href="../Crystagiri/Tag.html">Crystagiri::Tag</a>?
@@ -329,7 +372,7 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -345,17 +388,17 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="css&#40;query:String,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="css(query:String,&amp;block):Array(Tag)-instance-method">
       <div class="signature">
         
-        def <strong>css</strong>(query : String, &block)
+        def <strong>css</strong>(query : String, &block) : Array(<a href="../Crystagiri/Tag.html">Tag</a>)
 
-        <a class="method-permalink" href="#css%28query%3AString%2C%26block%29-instance-method">#</a>
+        <a class="method-permalink" href="#css%28query%3AString%2C%26block%29%3AArray%28Tag%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Find all node corresponding to the css query and yield
@@ -364,17 +407,33 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="where_class&#40;class_name:String,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="nodes:XML::Node-instance-method">
       <div class="signature">
         
-        def <strong>where_class</strong>(class_name : String, &block)
+        def <strong>nodes</strong> : XML::Node
 
-        <a class="method-permalink" href="#where_class%28class_name%3AString%2C%26block%29-instance-method">#</a>
+        <a class="method-permalink" href="#nodes%3AXML%3A%3ANode-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="where_class(class_name:String,&amp;block):Array(Tag)-instance-method">
+      <div class="signature">
+        
+        def <strong>where_class</strong>(class_name : String, &block) : Array(<a href="../Crystagiri/Tag.html">Tag</a>)
+
+        <a class="method-permalink" href="#where_class%28class_name%3AString%2C%26block%29%3AArray%28Tag%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Find all nodes by classname and yield
@@ -383,17 +442,17 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L66" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="where_tag&#40;tag_name:String,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="where_tag(tag_name:String,&amp;block):Array(Tag)-instance-method">
       <div class="signature">
         
-        def <strong>where_tag</strong>(tag_name : String, &block)
+        def <strong>where_tag</strong>(tag_name : String, &block) : Array(<a href="../Crystagiri/Tag.html">Tag</a>)
 
-        <a class="method-permalink" href="#where_tag%28tag_name%3AString%2C%26block%29-instance-method">#</a>
+        <a class="method-permalink" href="#where_tag%28tag_name%3AString%2C%26block%29%3AArray%28Tag%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Find all nodes by tag name and yield
@@ -402,7 +461,7 @@ from the url</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/madeindjs/crystagiri/blob/689300b2576dfc9e3fc63901ff3de6d5f9e0d9fc/src/crystagiri/html.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/giuseongit/Crystagiri/blob/6cdf95c8ef39aa13fb1604e433b64c1cfb290265/src/crystagiri/html.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
