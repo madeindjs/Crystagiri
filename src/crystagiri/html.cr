@@ -7,16 +7,6 @@ module Crystagiri
     getter :content
     getter :nodes
 
-    @@experimental = false
-
-    def self.experimental=(flag : Bool)
-      @@experimental = flag
-    end
-
-    def self.experimental
-      @@experimental
-    end
-
     # Initialize an Html object from Html source fetched
     # from the url
     def self.from_url(url : String, follow : Bool = false) : HTML
@@ -60,14 +50,14 @@ module Crystagiri
     def initialize(@content : String)
       @nodes = XML.parse_html @content
 
-      # WARNING: new engine test, may not work
       @ids = Hash(String, XML::Node).new
       @tags = Hash(String, Array(XML::Node)).new
       @classes = Hash(String, Array(XML::Node)).new
-      if @@experimental
-        visit @nodes  # Build internal id map
-      end
+
+      visit @nodes  # Build internal pointer map
     end
+
+    # Functions used to populate internal maps
 
     private def add_id(id : String, node : XML::Node)
       @ids[id] = node
@@ -87,9 +77,12 @@ module Crystagiri
       @classes[klass] << node
     end
 
+    # Depth-first visit. Given a node, extract metadata from
+    # node (if exists), then visit each child.
     private def visit(node : XML::Node)
+      # We only extract metadata from HTML nodes
       if node.element?
-        add_node node
+        add_node node 
         if to = node["id"]?
           add_id to, node
         end
@@ -97,6 +90,7 @@ module Crystagiri
           classes.split(' ') { |to| add_class to, node }
         end
       end
+      # visit each child
       node.children.each do | child |
         visit child
       end
@@ -105,62 +99,48 @@ module Crystagiri
     # Find first tag by tag name and return
     # `Crystagiri::Tag` founded or a nil if not founded
     def at_tag(tag_name : String) : Crystagiri::Tag | Nil
-      if @@experimental
-        if tags = @tags[tag_name]?
-          tags.each do |tag|
-            return Tag.new(tag).as Crystagiri::Tag
-          end
+      if tags = @tags[tag_name]?
+        tags.each do |tag|
+          return Tag.new(tag).as Crystagiri::Tag
         end
-        return nil
       end
-      where_tag(tag_name) { |tag| return tag }
       return nil
     end
 
     # Find all nodes by tag name and yield
     # `Crystagiri::Tag` founded
     def where_tag(tag_name : String, &block) : Array(Tag)
-      if @@experimental
-        arr = [] of Crystagiri::Tag
-        if tags = @tags[tag_name]?
-          tags.each do |node|
-            tag = Tag.new(node).as Crystagiri::Tag
-            yield tag
-            arr << tag
-          end
+      arr = [] of Crystagiri::Tag
+      if tags = @tags[tag_name]?
+        tags.each do |node|
+          tag = Tag.new(node).as Crystagiri::Tag
+          yield tag
+          arr << tag
         end
-        return arr
       end
-      return css(tag_name) { |tag| yield tag }
+      return arr
     end
 
     # Find all nodes by classname and yield
     # `Crystagiri::Tag` founded
     def where_class(class_name : String, &block) : Array(Tag)
-      if @@experimental
-        arr = [] of Crystagiri::Tag
-        if klasses = @classes[class_name]?
-          klasses.each do |node|
-            klass = Tag.new(node).as Crystagiri::Tag
-            yield klass
-            arr << klass
-          end
+      arr = [] of Crystagiri::Tag
+      if klasses = @classes[class_name]?
+        klasses.each do |node|
+          klass = Tag.new(node).as Crystagiri::Tag
+          yield klass
+          arr << klass
         end
-        return arr
       end
-      return css(".#{class_name}") { |tag| yield tag }
+      return arr
     end
 
     # Find a node by its id and return a
     # `Crystagiri::Tag` founded or a nil if not founded
     def at_id(id_name : String) : Crystagiri::Tag | Nil
-      if @@experimental
-        if node = @ids[id_name]?
-          return Tag.new(node).as Crystagiri::Tag
-        end
+      if node = @ids[id_name]?
+        return Tag.new(node).as Crystagiri::Tag
       end
-      css("##{id_name}") { |tag| return tag }
-      return nil
     end
 
     # Find all node corresponding to the css query and yield
