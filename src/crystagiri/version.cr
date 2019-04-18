@@ -1,3 +1,3 @@
 module Crystagiri
-  VERSION = "0.3.5"
+  VERSION = "0.4.0-alpha"
 end

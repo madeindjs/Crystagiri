@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.1">
+<meta name="generator" content="Crystal Docs 0.27.2">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -77,7 +77,7 @@
   crystagiri:
     github: madeindjs/crystagiri</code></pre>
 
-<p>and then run </p>
+<p>and then run</p>
 
 <pre><code class="language-bash">$ crystal deps</code></pre>
 
@@ -94,7 +94,9 @@
 <pre><code class="language-crystal">doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_file <span class="s">&quot;README.md&quot;</span>
 doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::</span><span class="t">HTML</span>.from_url <span class="s">&quot;http://example.com/&quot;</span></code></pre>
 
-<p>Then you can search all <a href="https://crystal-lang.org/api/0.20.1/XML/Node.html" target="_blank"><code>XML::Node</code></a>s from the <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> instance. The tags found will be <code><a href="Crystagiri/Tag.html">Crystagiri::Tag</a></code> objects with the <code>.node</code> property:</p>
+<blockquote>Also you can specify <code>follow: true</code> flag if you want to follow redirect URL</blockquote>
+
+<p>Then you can search all <a href="https://crystal-lang.org/api/XML/Node.html" target="_blank"><code>XML::Node</code></a>s from the <code><a href="Crystagiri/HTML.html">Crystagiri::HTML</a></code> instance. The tags found will be <code><a href="Crystagiri/Tag.html">Crystagiri::Tag</a></code> objects with the <code>.node</code> property:</p>
 
 <ul><li>CSS query</li></ul>
 
@@ -135,7 +137,7 @@ doc = Nokogiri::HTML File.read("spec/fixture/HTML.html")
 end
 puts "executed in #{Time.now - t1} milliseconds"</code></pre>
 
-<blockquote>executed in 00:00:12.08 seconds with Ruby 2.5.1 with RVM</blockquote>
+<blockquote>executed in 00:00:11.10 seconds with Ruby 2.6.0 with RVM on old Mac</blockquote>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;crystagiri&quot;</span>
 t <span class="o">=</span> <span class="t">Time</span>.now
@@ -146,9 +148,9 @@ doc <span class="o">=</span> <span class="t">Crystagiri</span><span class="t">::
 <span class="k">end</span>
 puts <span class="s">&quot;executed in </span><span class="i">#{</span><span class="t">Time</span>.now <span class="o">-</span> t<span class="i">}</span><span class="s"> milliseconds&quot;</span></code></pre>
 
-<blockquote>executed in 00:00:03.89 seconds on Crystal 0.27.0 on LLVM 4.0.0 with release flag</blockquote>
+<blockquote>executed in 00:00:03.09 seconds on Crystal 0.27.2 on LLVM 6.0.1 with release flag</blockquote>
 
-<p>Crystagiri is <strong>three time faster</strong> than Nokogiri!!</p>
+<p>Crystagiri is more than <strong>two time faster</strong> than Nokogiri!!</p>
 
 <h2>Development</h2>
 
@@ -157,11 +159,11 @@ puts <span class="s">&quot;executed in </span><span class="i">#{</span><span cla
 <pre><code class="language-bash">$ git clone https://github.com/madeindjs/crystagiri.git
 $ cd crystagiri</code></pre>
 
-<p>You can generate all documentation with </p>
+<p>You can generate all documentation with</p>
 
 <pre><code class="language-bash">$ crystal doc</code></pre>
 
-<p>And run <strong>spec</strong> tests to ensure everything works correctly </p>
+<p>And run <strong>spec</strong> tests to ensure everything works correctly</p>
 
 <pre><code class="language-bash">$ crystal spec</code></pre>
 
@@ -171,7 +173,7 @@ $ cd crystagiri</code></pre>
 
 <h2>Contributors</h2>
 
-<ul><li><a href="https://github.com/madeindjs" target="_blank">madeindjs</a> - creator, maintainer</li></ul>
+<p>See the <a href="https://github.com/madeindjs/Crystagiri/graphs/contributors" target="_blank">list on Github</a></p>
 </div>
 </body>
 </html>
