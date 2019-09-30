@@ -134,6 +134,11 @@ $ crystal spec
 
 ## Contributing
 
+Do you like this project? [here](https://github.com/madeindjs/Crystagiri/issues/) you can find
+some issues to get started.
+
+Contributing is simple:
+
 1. Fork it ( https://github.com/madeindjs/crystagiri/fork )
 2. Create your feature branch `git checkout -b my-new-feature`
 3. Commit your changes `git commit -am "Add some feature"`
