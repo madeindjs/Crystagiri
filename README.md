@@ -17,7 +17,7 @@ dependencies:
 and then run
 
 ```bash
-$ crystal deps
+$ shards install
 ```
 
 ## Usage
